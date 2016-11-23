@@ -26,3 +26,12 @@ Step 3:
 	- This script will output X-1 files (i.e. outputs 12 files if you input 13 files). This is because each new cloud consists of a stitched cloud pair.
 	- The new stitched clouds will be stored in the plyClouds2 folder under the names cloudX_registered.ply.
 	- You can load all of the clouds into Meshlab at once for viewing.
+
+Step 4:
+	- Display the stitched clouds (cloudX_registered.ply) in Meshlab or any other viewer
+
+Step 5:
+	- To concatenate clouds, run concatenateClouds.cpp by typing:
+	- $ ./concatenateClouds ../plyClouds2/cloud{1..12}_registered.ply
+	- This script will voxellize the cloud to reduce the number of points.
+	- You will see errors regarding an element 'camera' that isn't handled. It doesn't appear to be an issue.

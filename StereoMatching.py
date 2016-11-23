@@ -58,7 +58,7 @@ if __name__ == '__main__':
     ifile.close()
 
 	# Loop through the images
-    for i in range(0,20,4):
+    for i in range(0,12):
 
 		doubledigit = ('{num:02d}'.format(num=i))
 

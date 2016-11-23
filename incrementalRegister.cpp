@@ -174,6 +174,7 @@ void loadData (int argc, char **argv, std::vector<PCD, Eigen::aligned_allocator<
     if (fname.size () <= extension.size ())
       continue;
 
+	//UNCLEAR TO MERRITT WHAT THIS IS/DOES
     std::transform (fname.begin (), fname.end (), fname.begin (), (int(*)(int))tolower);
 
     //check that the argument is a pcd file
@@ -254,7 +255,7 @@ void pairAlign (const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt
   reg.setTransformationEpsilon (1e-6);
   // Set the maximum distance between two correspondences (src<->tgt) to 10cm
   // Note: adjust this based on the size of your datasets
-  reg.setMaxCorrespondenceDistance (0.05);  
+  reg.setMaxCorrespondenceDistance (0.15);  
   // Set the point representation
   reg.setPointRepresentation (boost::make_shared<const MyPointRepresentation> (point_representation));
 
@@ -337,18 +338,44 @@ int main (int argc, char** argv)
     PCL_ERROR ("[*] - multiple files can be added. The registration results of (i, i+1) will be registered against (i+2), etc");
     return (-1);
   }
-  PCL_INFO ("Loaded %d datasets.", (int)data.size ());
+  PCL_INFO ("Loaded %d datasets.\n", (int)data.size ());
   
   // Create a PCLVisualizer object
   p = new pcl::visualization::PCLVisualizer (argc, argv, "Pairwise Incremental Registration example");
   p->createViewPort (0.0, 0, 0.5, 1.0, vp_1);
   p->createViewPort (0.5, 0, 1.0, 1.0, vp_2);
 
-	PointCloud::Ptr result (new PointCloud), source, target;
+  PointCloud::Ptr result (new PointCloud), source, target;
   Eigen::Matrix4f GlobalTransform = Eigen::Matrix4f::Identity (), pairTransform;
+
+
+  // Parse the first argument to know the starting point cloud number
+  std::string s = argv[1];
+  std::string delimiter = "Cloud";
+
+  size_t pos = 0;
+  std::string token;
+  while ((pos = s.find(delimiter)) != std::string::npos) {
+    token = s.substr(0, pos);
+    //std::cout << token << std::endl;
+    s.erase(0, pos + delimiter.length());
+  }
+  std::cout << s << std::endl;
+  std::string delimiter2 = "_";
+  std::string cloudNumber = s.substr(0, s.find(delimiter2));
+
+  // Print the starting cloud number
+  cout << cloudNumber << endl;
+
+  // Convert that cloud number to an int
+  int value = atoi(cloudNumber.c_str());
+  cout << "value is: " << value << endl;
+
   
-  for (size_t i = 1; i < data.size (); ++i)
+  for (size_t i = 1; i < data.size(); ++i)
   {
+
+    cout << "i is " << i << endl;
     source = data[i-1].cloud;
     target = data[i].cloud;
 
@@ -368,10 +395,10 @@ int main (int argc, char** argv)
 	//save aligned pair, transformed into the first cloud's frame
     std::stringstream ss;
     //ss << i << ".pcd";
-	ss << "../plyClouds2/cloud" << i << "_registered.ply";
+	ss << "../plyClouds2/cloud" << (value+i) << "_registered.ply";
     //pcl::io::savePCDFile (ss.str (), *result, true);
     pcl::io::savePLYFile (ss.str (), *result, true);
-
+    cout << "writing to: " <<  "../plyClouds2/cloud" << (value+i) << "_registered.ply" << endl;
   }
 }
 /* ]--- */
