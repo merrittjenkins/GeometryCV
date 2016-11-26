@@ -17,5 +17,8 @@ target_link_libraries(statOutlierBundled ${PCL_LIBRARIES})
 add_executable(incrementalRegister incrementalRegister.cpp)
 target_link_libraries(incrementalRegister ${PCL_LIBRARIES})
 
+add_executable(incrementalRegister_noVis incrementalRegister_noVis.cpp)
+target_link_libraries(incrementalRegister_noVis ${PCL_LIBRARIES})
+
 add_executable(concatenateClouds concatenateClouds.cpp)
 target_link_libraries(concatenateClouds ${PCL_LIBRARIES})
