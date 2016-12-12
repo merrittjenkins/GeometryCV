@@ -25,3 +25,9 @@ add_definitions(${PCL_DEFINITIONS})
 
 add_executable(SGBM SGBM.cpp)
 target_link_libraries(SGBM ${OpenCV_LIBS} opencv_nonfree)
+
+add_executable(SGBM2 SGBM2.cpp)
+target_link_libraries(SGBM2 ${OpenCV_LIBS} opencv_nonfree)
+
+add_executable(SGBM3 SGBM3.cpp)
+target_link_libraries(SGBM3 ${OpenCV_LIBS} opencv_nonfree)
