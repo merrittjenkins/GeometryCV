@@ -80,9 +80,9 @@ int main(int argc, char** argv)
     //------------------------------------LOAD IMAGES-----------------------------------------
 
     //The first two images are the stereo pair. The third image is the one that has moved (we don't know its position)
-    std::string img1_filename = "../Sorghum_Stitching/images/left000008.jpg";
-    std::string img2_filename = "../Sorghum_Stitching/images/right000008.jpg";
-    std::string img3_filename = "../Sorghum_Stitching/images/left000009.jpg";
+    std::string img1_filename = "../Sorghum_Stitching/images/left000007.jpg";
+    std::string img2_filename = "../Sorghum_Stitching/images/right000007.jpg";
+    std::string img3_filename = "../Sorghum_Stitching/images/left000008.jpg";
     std::string disparity_filename = "disparity.jpg";
 
     //cloud.ply is the point cloud of the plant, features.ply are the 2D features out in 3D
