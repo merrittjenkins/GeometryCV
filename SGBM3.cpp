@@ -15,13 +15,6 @@
 using namespace cv;
 using namespace std;
 
-static void print_help()
-{
-    printf("\nDemo stereo matching converting L and R images into disparity and point clouds\n");
-    printf("\nUsage: stereo_match [--algorithm=bm|sgbm|hh|sgbm3way] [--blocksize=<block_size>]\n"
-           "[--max-disparity=<max_disparity>] [--scale=scale_factor>] [--no-display]\n");
-}
-
 static void saveXYZ(const char* filename, const Mat& mat, const Mat& img1)
 {
     const double max_z = 1.0e4;
@@ -360,7 +353,7 @@ int main(int argc, char** argv)
     vector<KeyPoint> keypoints_im2;
 
     //This loops through all of the matched feature points and finds the image coordinate in 3D. If the z-coordinate is less than 3D (ie if the block matching found a match),
-    //then the 3d points are saved to a vector and the 2D feature points in the second image (image 6)
+    //then the 3d points are saved to a vector and the 2D feature points in the second image
     for( int i = 0; i < (int)good_matches.size(); i++ )
     {
         //cout << keypoints_1[good_matches[i].queryIdx].pt << endl;
