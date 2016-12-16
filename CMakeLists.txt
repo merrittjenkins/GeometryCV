@@ -10,6 +10,7 @@ include_directories(${PCL_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
+#list(APPEND LIBRARIES_LIST ${OpenCV_LIBRARIES} )
 
 #add_executable(loadImage loadImage.cpp)
 #target_link_libraries(loadImage ${OpenCV_LIBS})
@@ -23,6 +24,9 @@ add_definitions(${PCL_DEFINITIONS})
 #add_executable(BruteForce BruteForce.cpp)
 #target_link_libraries(BruteForce ${OpenCV_LIBS} opencv_nonfree)
 
+include_directories(include)
+set(SOURCES src/SGBM4.cpp src/write_ply.cpp src/scale_image.cpp src/feature_match.cpp)# ${include}/write_ply.h)
+
 add_executable(SGBM SGBM.cpp)
 target_link_libraries(SGBM ${OpenCV_LIBS} opencv_nonfree)
 
@@ -31,3 +35,6 @@ target_link_libraries(SGBM2 ${OpenCV_LIBS} opencv_nonfree)
 
 add_executable(SGBM3 SGBM3.cpp)
 target_link_libraries(SGBM3 ${OpenCV_LIBS} opencv_nonfree)
+
+add_executable(SGBM4 ${SOURCES})
+target_link_libraries(SGBM4 ${OpenCV_LIBS} opencv_nonfree)
